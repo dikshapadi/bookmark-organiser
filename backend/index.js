@@ -20,4 +20,5 @@ connectDB();
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/categories', categoryRoutes);
 
+// App running on port 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

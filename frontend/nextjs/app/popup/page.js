@@ -11,7 +11,7 @@ export default function Popup() {
       chrome.runtime.onMessage.addListener((message) => {
         if (message.action === 'bookmarkStored') {
           chrome.storage.local.get(['newlyCreatedBookmark'], (result) => {
-            console.log('Retrieved bookmark from chrome.storage.local:', result.newlyCreatedBookmark); // Debug log
+            console.log('Retrieved bookmark from chrome.storage.local:', result.newlyCreatedBookmark); 
             setBookmark(result.newlyCreatedBookmark);
           });
         }
@@ -22,7 +22,7 @@ export default function Popup() {
       try {
         const response = await fetch('http://localhost:5000/api/categories');
         const data = await response.json();
-        console.log('Fetched categories:', data); // Debug log
+        console.log('Fetched categories:', data); 
         setCategories(data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -51,7 +51,7 @@ export default function Popup() {
         if (response.ok) {
           const data = await response.json();
           console.log('Bookmark saved:', data);
-          chrome.storage.local.remove(['newlyCreatedBookmark']); // Remove the bookmark after saving
+          chrome.storage.local.remove(['newlyCreatedBookmark']); 
           window.close();
         } else {
           console.error('Error saving bookmark:', response.statusText);

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Bookmark = require('../models/Bookmark');
 
-// Create a new bookmark
+// POST bookmark
 router.post('/', async (req, res) => {
     const { title, url, category } = req.body;
     try {
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Get all bookmarks
+// GET bookmark
 router.get('/', async (req, res) => {
     try {
         const bookmarks = await Bookmark.find();
