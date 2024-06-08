@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bookmark Organizer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 12px;
+    }
+    select, button {
+      margin-top: 10px;
+    }
+    #save-button {
+        background-color: cornflowerblue;
+        border: none;
+        padding: 6px 30px;
+        border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bookmark Organiser</h1>
+  <div id="bookmark-info">
+    <p>Loading bookmark...</p>
+  </div>
+  <select id="category-select">
+    <option value="">Select a category</option>
+    <!-- categories shd be fetched here -->
+  </select>
+  <button id="save-button">Save</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
