@@ -9,6 +9,16 @@
       padding: 20px;
       width: 200px;
       height: 300px;
+      background-color: #F1F1F1
+    }
+    .category-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 10px;
+    }
+    .category-carousel::-webkit-scrollbar {
+      display: none; /* Hide the scrollbar */
     }
     h1 {
       font-size: 12px;
@@ -28,10 +38,22 @@
         font-size: small;
         font-weight: 600;
     }
+    #view-bookmarks-button{
+      background-color: #3ABEF9; 
+      border: none;
+      border-radius: 8px; 
+      padding: 2px 8px; 
+      font-size: 14px; 
+      margin: 0;
+      display: inline-block;
+      color: #050C9C;
+      font-weight: 400;
+      margin-top: 45px;
+    }
     #header {
       display: flex;
       align-items: center;
-    }
+    } 
     #logo {
       width: 25px;
       height: 25px;
@@ -41,6 +63,17 @@
       font-size: 20px;
       font-weight: 700;
       color: #002379;
+    }
+    .category h2 {
+      background-color: #9BEC00; 
+      border-radius: 8px; 
+      padding: 2px 8px; 
+      font-size: 14px; 
+      margin: 0;
+      display: inline-block;
+      color: green;
+      font-weight: 400;
+      margin-top: 2px;
     }
   </style>
 </head>
@@ -58,7 +91,8 @@
     <!-- categories should be fetched here -->
   </select>
   <button id="save-button">BookMarkIt</button>
-
+  <button id="view-bookmarks-button">View Bookmarks</button>
+  <div id="bookmarks" class="category-carousel"></div>
   <script src="popup.js"></script>
 </body>
 </html>
