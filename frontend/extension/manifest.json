@@ -7,7 +7,7 @@
       "storage",
       "tabs",
       "activeTab"
-      
+
     ],
     "background": {
       "service_worker": "background.js"
@@ -17,9 +17,9 @@
       "default_title": "Bookmark Organizer"
     },
     "icons": {
-      "16": "logo.png",
-      "48": "logo.png",
-      "128": "logo.png"
+      "16": "logoo.png",
+      "48": "logoo.png",
+      "128": "logoo.png"
     }
   
   }
