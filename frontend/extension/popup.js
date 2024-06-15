@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
           categoryDiv.appendChild(bookmarkDiv);
         });
         bookmarksDiv.appendChild(categoryDiv);
+        viewBookmarksButton.style.display = 'none';
       });
     } catch (error) {
       console.error('Error fetching bookmarks:', error);
