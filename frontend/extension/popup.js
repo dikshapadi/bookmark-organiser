@@ -5,16 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewBookmarksButton = document.getElementById('view-bookmarks-button');
   const bookmarksDiv = document.getElementById('bookmarks');
 
-  // Fetch the bookmark from local storage
-  chrome.storage.local.get(['newlyCreatedBookmark'], (result) => {
-    const bookmark = result.newlyCreatedBookmark;
-    if (bookmark) {
-      bookmarkInfoDiv.innerHTML = `<h2>${bookmark.title}</h2><p>${bookmark.url}</p>`;
-    } else {
-      bookmarkInfoDiv.innerHTML = `<p>No bookmark found.</p>`;
-    }
-  });
-
   // Fetch categories 
   const fetchCategories = async () => {
     try {
@@ -34,7 +24,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchCategories();
 
-  // save bookmark+category
+  // Define function to classify URL
+  const classifyUrl = async (title, url) => {
+    const response = await fetch('http://localhost:5000/api/bookmarks/classify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title, url })
+    });
+    const data = await response.json();
+    return data.category;
+  };
+
+  // Fetch the bookmark from local storage and classify it
+  chrome.storage.local.get(['newlyCreatedBookmark'], async (result) => {
+    const bookmark = result.newlyCreatedBookmark;
+    if (bookmark) {
+      bookmarkInfoDiv.innerHTML = `<h2>${bookmark.title}</h2><p>${bookmark.url}</p>`;
+      try {
+        const category = await classifyUrl(bookmark.title, bookmark.url);
+        categorySelect.value = category;
+      } catch (error) {
+        console.error('Error classifying bookmark:', error);
+      }
+    } else {
+      bookmarkInfoDiv.innerHTML = `<p>No bookmark found.</p>`;
+    }
+  });
+
+  // Save bookmark + category
   saveButton.addEventListener('click', () => {
     const selectedCategory = categorySelect.value;
     if (selectedCategory) {
@@ -66,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // fetch bookmark category-wise
+  // Fetch bookmarks category-wise
   viewBookmarksButton.addEventListener('click', async () => {
     try {
       const response = await fetch('http://localhost:5000/api/bookmarks');
